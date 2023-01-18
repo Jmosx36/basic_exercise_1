@@ -7,7 +7,6 @@ pub fn limpiar_consola() {
         Ok(o) => {
             unsafe {
                 println!("{}", String::from_utf8_unchecked(o.stdout));
-                
             }
         }
         Err(e) => {
@@ -16,5 +15,6 @@ pub fn limpiar_consola() {
     }
 
 }
-// En teoría, esta función debería funcionar en cualquier sistema operativo, excepto FreeBSD,
-// aunque eso no lo confirmo
+// En teoría, esta función debería funcionar en cualquier sistema operativo, excepto FreeBSD, aunque eso no lo confirmo
+
+// Creo que debería agregar mas comandos en este formulario, pero ya veremos si me acuerdo o se me ocurren mas ideas

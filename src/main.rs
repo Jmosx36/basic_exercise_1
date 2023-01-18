@@ -2,7 +2,7 @@
     Pendientes:
     1) Agregar la tolerancia a fallas (Terminado)
     2) Dividir los múltiples if en subfunciones (Terminado)
-    3) Hacer posible expandir la lista de clientes solo agregándolos a la función creadora para que no esté sujeto a 30
+    3) Hacer posible expandir la lista de clientes solo agregándolos a la función creadora para que no esté sujeto a 30 IMPOSIBLE
     4) Creo que la siguiente fase será imprimir la información en una tabla mas organizada y estética
     4.1) Creo que el camino a tomar debe ser la librería stanza, le voy a dar el intento (SIP, ES EL CAMINO)
     4.2) En el main no va la librería, solamente en los módulos de impresión de clientes

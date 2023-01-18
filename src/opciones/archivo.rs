@@ -23,6 +23,7 @@ pub fn archivo(lista: &[Clientes; 30]) {
 
        let read_v = fs::read("informacion_clientes.jmosx").expect("No se pudo leer el archivo");
        let decoded_v: Vec<Clientes> = bincode::deserialize(&read_v).expect("No se pudo decodificar el vector");
+       // Esta parte de código es por si es necesario en otra parte
 
     */
 

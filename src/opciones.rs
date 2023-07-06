@@ -1,4 +1,4 @@
-// Declara todos los módulos ubucados dentro de la carpeta opciones
+// Declara todos los módulos ubicados dentro de la carpeta opciones
 pub mod clientes_lista;
 pub mod consultar_saldo;
 pub mod depositar_saldo;

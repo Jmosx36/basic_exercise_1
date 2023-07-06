@@ -39,51 +39,36 @@ pub fn ingresar_cliente(lista: &mut [Clientes; 30]) {
             let mut sexo_resul = String::new();
             let mut saldo = String::new();
 
-            println!("");
-            println!("Ingrese la cédula");
+            println!("\nIngrese la cédula");
             io::stdin() // Toma un valor por consola
                 .read_line(&mut cedula)
                 .expect("Error al leer la línea");
-            let cedula: u32 = match cedula.trim().parse() { // Convierte el valor de consola en un integer
-                Ok(num) => num,
-                Err(_) => 1,
-            };
+            let cedula: u32 = cedula.trim().parse().unwrap_or(1); // Convierte el valor de consola en un integer
 
-            println!("");
-            println!("Ingrese el nombre");
+            println!("\nIngrese el nombre");
             io::stdin() // Toma un valor por consola
                 .read_line(&mut nombre)
                 .expect("Error al leer la línea");
 
-            println!("");
-            println!("1) Masculino");
-            println!("2) Femenino");
-            println!("");
+            println!("\n1) Masculino");
+            println!("2) Femenino\n");
             println!("Ingrese la opción del sexo");
             io::stdin() // Toma un valor por consola
                 .read_line(&mut sexo)
                 .expect("Error al leer la línea");
-            let sexo: u32 = match sexo.trim().parse() { // Convierte el valor de consola en un integer
-                Ok(num) => num,
-                Err(_) => 0,
-            };
-            if sexo == 1 {
-                sexo_resul = String::from("Masculino");
-            }else if sexo == 2 {
-                sexo_resul = String::from("Femenino");
-            }else {
-                sexo_resul = String::from("Desconocido"); // Si se digita una opción de sexo incorrecta, este será el resultado
-            }
+            let sexo: u32 = sexo.trim().parse().unwrap_or(0);
 
-            println!("");
-            println!("Ingrese el saldo");
+            match sexo {
+                1 => sexo_resul = String::from("Masculino"),
+                2 => sexo_resul = String::from("Femenino"),
+                _ => sexo_resul = String::from("Desconocido"),
+            };
+
+            println!("\nIngrese el saldo");
             io::stdin() // Toma un valor por consola
                 .read_line(&mut saldo)
                 .expect("Error al leer la línea");
-            let saldo: u32 = match saldo.trim().parse() { // Convierte el valor de consola en un integer
-                Ok(num) => num,
-                Err(_) => 0,
-            };
+            let saldo: u32 = saldo.trim().parse().unwrap_or(0);
 
             lista[opcion].cedula = cedula;  // Ingresa los valores al campo de la lista correspondiente
             lista[opcion].nombre = nombre;

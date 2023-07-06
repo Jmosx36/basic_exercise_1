@@ -7,7 +7,7 @@
     4.1) Creo que el camino a tomar debe ser la librería stanza, le voy a dar el intento (SIP, ES EL CAMINO)
     4.2) En el main no va la librería, solamente en los módulos de impresión de clientes
     4.3) Creo que voy a hacer un módulo general para imprimir tablas y le envío los parámetros correspondientes TERMINADO
-    5) Guardar el array de los clientes en un archivo y leer de él en la siguiente ejecución para conservar el estado actual del array TERMIANO
+    5) Guardar el array de los clientes en un archivo y leer de él en la siguiente ejecución para conservar el estado actual del array TERMINADO
 */
 
 mod opciones; // Ingresa al archivo opciones.rs y busca los módulos que ahí estén especificados
@@ -29,7 +29,7 @@ use opciones::{
     retirar_saldo::retirar_saldo,
     saldo::saldo,
     comandos_consola::limpiar_consola,
-    archivo::archivo,
+    archivo::crear_archivo,
     ultimo_cambio::ultimo_cambio,
 };
 
@@ -47,24 +47,23 @@ fn main() {
 
         println!("Por favor, digite un número de la opción\n");
 
-        let mut valor = String::new(); // Declara la variable de la opción de consola
+        let mut valor_consola = String::new(); // Declara la variable de la opción de consola
 
         io::stdin()  //  Función para ingresar un dato por consola
-            .read_line(&mut valor) // Guarda el dato de consola en la variable
+            .read_line(&mut valor_consola) // Guarda el dato de consola en la variable
             .expect("Error al leer la línea");
 
-        let valor: u32 = match valor.trim().parse() {  // trim hace que se eliminen espacios y saltos de línea al principio y final del string,
-                                                       // parse analiza el contenido de la variable y lo convierte al tipo de dato de la declaración de la variable al principio de la línea
+        let valor_consola: u32 = match valor_consola.trim().parse() {
 
-            Ok(num) => num,    // El parse es un enum, y puede regresar Ok o Err, el match se utiliza para crear una acción si se presenta cualquiera de ambos resultados
+            Ok(num) => num,
             Err(_) => {
                 limpiar_consola();
                 println!("Debe ingresar un número");
                 continue;
-            },   // El _ significa que acepte cualquier argumento que pueda llegar dentro del paréntesis
+            },
         };
 
-        match valor { // En vez de hacer una larga comparación con if, se hace un match, pero no
+        match valor_consola { // En vez de hacer una larga comparación con if, se hace un match, pero no
                       // estoy seguri si esto reduce, asi sea un poco, el uso de cpu, no se si es
                       // una comparación mas rápida, pero creo que si
 
@@ -93,16 +92,15 @@ fn main() {
 
                 let opcion_saldo: u32 = opcion_saldo.trim().parse().unwrap_or(0);   // trim hace que se eliminen espacios y saltos de línea al principio y final del string, parse analiza y el unwrap or hace que se devuelva el contenido de Ok o se devuelva un 0
 
-                if opcion_saldo == 1 {
-                    saldo(&lista, 1);
-                }else if opcion_saldo == 2 {
-                    saldo(&lista, 2);
-                }else {
-                    limpiar_consola();
-                    println!("Debe escoger una opción correcta");
-                }
-
-                },
+                match opcion_saldo {
+                    1 => saldo(&lista, 1),
+                    2 => saldo(&lista, 2),
+                    _ => {
+                        limpiar_consola();
+                        println!("Debe escoger una opción correcta");
+                    }
+                };
+            },
 
             // Opción 6
             6 => filtrar_saldo(&lista),
@@ -117,10 +115,10 @@ fn main() {
             9 => consultar_saldo(&lista),
 
             // Opción 10
-            10 => archivo(&lista),
+            10 => crear_archivo(&lista),
 
             // Opción 11
-            11 =>match ultimo_cambio(&lista) {
+            11 => match ultimo_cambio(&lista) {
                 0 => break,
                 _ => continue,
             },

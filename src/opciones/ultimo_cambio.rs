@@ -26,14 +26,12 @@ pub fn ultimo_cambio(lista: &[Clientes; 30]) -> u8  {
             comparacion += 1;
         }
     }
-    if comparacion > 0 {
-        // Lista de opciones
-        println!("Hay cambios aún sin guardar\n");
-        println!("1) Salir sin guardar\n2) Guardar y salir\n3) Regresar");
-    } else {
+    if comparacion == 0 {
         println!("Muchas gracias, vuelva pronto\nPrograma hecho por Jmosx36");
         return 0;
     }
+    println!("Hay cambios aún sin guardar\n");
+    println!("1) Salir sin guardar\n2) Guardar y salir\n3) Regresar");
 
     let mut valor = String::new(); // Declara la variable de la opción de consola
 
@@ -41,7 +39,9 @@ pub fn ultimo_cambio(lista: &[Clientes; 30]) -> u8  {
         .read_line(&mut valor) // Guarda el dato de consola en la variable
         .expect("Error al leer la línea");
 
-    let valor: u32 = valor.trim().parse().unwrap_or({println!("Debe ingresar un número"); 36});
+    let valor: u32 = valor.trim().parse().unwrap_or({
+        println!("Debe ingresar un número"); 36 // No importa el número que regrese, con tal de que no sea 0 al 2
+    });
 
     match valor {
         1 => { // Salir sin guardar
@@ -51,7 +51,7 @@ pub fn ultimo_cambio(lista: &[Clientes; 30]) -> u8  {
         },
 
         2 => { // Guardar y salir
-            archivo(lista); // Guarda la información actual
+            crear_archivo(lista); // Guarda la información actual
             0
         },
 

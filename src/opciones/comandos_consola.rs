@@ -10,7 +10,7 @@ pub fn limpiar_consola() {
             }
         }
         Err(e) => {
-            println!("Hubo un error {}", e);
+            println!("Hubo un error al limpiar la consola{}", e);
         }
     }
 
@@ -18,3 +18,4 @@ pub fn limpiar_consola() {
 // En teoría, esta función debería funcionar en cualquier sistema operativo, excepto FreeBSD, aunque eso no lo confirmo
 
 // Creo que debería agregar mas comandos en este formulario, pero ya veremos si me acuerdo o se me ocurren mas ideas
+// Creo que al final no se me ocurrieron mas ideas
